@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<analyzerinfo hash="15940228445732326275">
-        <error id="syntaxError" severity="error" msg="syntax error" verbose="syntax error" file0="/home/michaelwk/Projects/agizo_lang/agizo/include/dtypes.h">
-            <location file="/home/michaelwk/Projects/agizo_lang/agizo/include/dtypes.h" line="17" column="1"/>
-        </error>
-</analyzerinfo>
