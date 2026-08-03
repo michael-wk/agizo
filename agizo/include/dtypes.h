@@ -1,6 +1,7 @@
 #ifndef _DTYPES_
 #define _DTYPES_
 
+#include <stdint.h>
 
 /*
  * DTypes defines data types (and instruction types) that exist in
@@ -16,9 +17,9 @@
 
 enum _type
 {
-    number;
-    string;
-}
+    number,
+    string,
+};
 
 struct DType
 {
@@ -26,6 +27,7 @@ struct DType
     uint8_t sign;
     // something that represents what actually is the datatype of this thing
     // an enum? w
+    enum _type type;
 
 };
 
