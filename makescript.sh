@@ -7,6 +7,8 @@ if [[ -z "$1" ]]; then
     exit 1;
 fi
 
+echo "__________________________________________"
+echo "*makescript*"
 
 echo "> Creating build directory at ./$1"
 mkdir -p "$1"/temp
@@ -101,9 +103,9 @@ assemble()
 link_program()
 {
     
-    echo "linking"
+    echo "> Linking"
     if ! gcc "$build_dir"/temp/*.o -o "$build_dir"/agizo.out; then
-        echo "Build failed at link stage"
+        echo "> Build failed at link stage"
     fi
 }
 
@@ -112,18 +114,25 @@ link_program()
 assemble
 
 
-echo "assembled count : "${assembled_count}
+echo "> Assembled count : "${assembled_count}
 if (( err > 0 )); then
-    echo "Build failed : $err files could not be built" 
+    echo "> Build failed : $err files could not be built" 
     exit
 fi
 
 if (( assembled_count <= 0 )); then
-    echo "No work to do"
-    exit
+    echo "> No work to do"
+else
+    link_program
 fi
 
-link_program
+
+if [[ $2 == "t1" ]]; then
+    echo "__________________________________________"
+    echo "*test_1 build*"
+    ls build/temp
+    gcc -Ilib $(find "$build_dir/temp" -name '*.o' ! -name 'main.o') test_1/main.c -o build/test_1.out
+fi
 
 exit
 

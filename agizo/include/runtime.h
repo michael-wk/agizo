@@ -14,17 +14,17 @@
  */
 
 
-struct AgizoStack
+typedef struct agizo_stack
 {
     struct DType stack[STACK_SIZE];
     uint8_t ptr;
 
-};
+} AgizoStack;
 
-struct RunTime
-{
-
-};
+//struct RunTime
+//{
+//
+//};
 
 
 
