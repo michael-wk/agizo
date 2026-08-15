@@ -2,9 +2,22 @@
 #define _AGIZO_RUNTIME_
 
 #include <stdint.h>
+#include <stdio.h>
 #include <dtypes.h>
 
 #define STACK_ALLOC_SIZE 64
+#define MAX_FILE_CHARS 255
+
+// Error codes
+// ===========
+typedef enum
+{
+    GOOD, //0
+    FILE_BOUNDS_EXCEEDED,
+
+} RET_STATE;
+
+
 
 // Agizo Stack
 // ===========
@@ -14,23 +27,29 @@
 */
 typedef struct agizo_stack
 {
-    struct DType* stack;
+    agizo_data stack[STACK_ALLOC_SIZE];
     uint8_t ptr;
     uint8_t size;
     uint8_t top;
 
 } Agizo_Stack;
 
+// pushes data onto the agizo stack
+void agizo_stack_push(agizo_data* data);
+
+// pops data from the agizo stack`
+void agizo_stack_pop();
 
 // Agizo Runtime & related methods
 // ===============================
-
 /*  Agizo Runtime
  *  @brief agizo
 */
 typedef struct
 {
     Agizo_Stack* agizo_stack;
+
+    uint16_t file_c; // file character count
 } Agizo_Runtime; 
 
 /*  Runtime Init
@@ -44,7 +63,12 @@ void agizo_runtime_init(Agizo_Runtime* runtime, Agizo_Stack* a_stack);
  */
 void agizo_runtime_debug(Agizo_Runtime*);
 
+/*@brief executes an open file
+*/
+uint8_t agizo_execute_file(Agizo_Runtime* r, FILE* fp);
 
-
+/*@brief executes a string
+*/
+uint8_t agizo_execute_string(Agizo_Runtime* r, char* string);
 
 #endif

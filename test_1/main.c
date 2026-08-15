@@ -8,7 +8,8 @@
 #include "agizo.h"
 #include <stdio.h>
 
-//const char* file =
+
+FILE* fptr;
 
 int main()
 {
@@ -18,10 +19,18 @@ int main()
     agizo_runtime_init(&runtime, &stack);
     agizo_runtime_debug(&runtime); 
 
-    while (0)
+    fptr = fopen("./t_file.agizo", "r");
+    if (fptr == NULL)
     {
-
+        printf("Error: couldn't open file\r\n");
+        return 1;
     }
+    //char content[MAX_FILE_CHARS];
+    //fgets(content, MAX_FILE_CHARS, fptr);
+    //printf("Got file contents: %s\r\n", content);
+    
 
-    return 0;
+    RET_STATE result = agizo_execute_file(&runtime, fptr);
+
+    return result;
 }

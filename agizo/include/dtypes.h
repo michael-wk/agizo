@@ -15,21 +15,20 @@
 // string
 // var
 
-enum _type
+typedef enum
 {
-    number,
-    string,
-};
+    NUMBER,
+    STRING,
+    NFUNC
+} agizo_data_type;
 
-struct DType
+typedef struct
 {
     int32_t value;
     uint8_t sign;
-    // something that represents what actually is the datatype of this thing
-    // an enum? w
-    enum _type type;
+    agizo_data_type type;
 
-};
+} agizo_data;
 
 
 #endif
