@@ -14,7 +14,7 @@ typedef enum
 {
     GOOD, //0
     FILE_BOUNDS_EXCEEDED,
-
+    REALLOC_FAILED
 } RET_STATE;
 
 

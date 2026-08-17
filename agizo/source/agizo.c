@@ -1,9 +1,10 @@
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "agizo.h"
 #include "lexer.h"
 #include "dtypes.h"
-
 
 
 void agizo_runtime_init(Agizo_Runtime* runtime, Agizo_Stack* a_stack)
@@ -15,6 +16,7 @@ void agizo_runtime_init(Agizo_Runtime* runtime, Agizo_Stack* a_stack)
 }
 
 
+
 void agizo_runtime_debug(Agizo_Runtime* runtime)
 {
     printf("\r\n______________\r\nruntime debug:\r\nstack size  :   %d\r\nstack ptr   :   %d\r\nstack top   :   %d\r\n",
@@ -22,12 +24,17 @@ void agizo_runtime_debug(Agizo_Runtime* runtime)
 }
 
 
+
 uint8_t agizo_execute_file(Agizo_Runtime* r, FILE* fp)
 {
-    printf("executing file\r\n");
+   
+    printf("______________\r\n");
+    printf("executing file:\r\n");
     r->file_c = 0;
     char* s = malloc(sizeof(char) * MAX_FILE_CHARS);
     int ch;
+    
+    // populating string with file content
     while ((ch = getc(fp)) != EOF)
     {
         if (r->file_c == MAX_FILE_CHARS -1)
@@ -37,19 +44,29 @@ uint8_t agizo_execute_file(Agizo_Runtime* r, FILE* fp)
         }
         s[r->file_c++] = ch;
     }
-    s[r->file_c++] = '\0';
-    char* scaled_s;
-    scaled_s = realloc(s, sizeof(char)*r->file_c);
-    s = scaled_s;
-    RET_STATE res = agizo_execute_string(r, scaled_s);
+    s[r->file_c++] = '\0'; // null terminating string
+   
+    //printf("file");
+    // reallocating string to actual size within bounds
+    //char* tmp;
+    //tmp = realloc(s, sizeof(char)*r->file_c);
+    
+    //if (tmp == NULL)
+    //{
+    //    free(s);
+    //    return REALLOC_FAILED;
+    //} else
+    //{
+    //    s = tmp;
+    //}
 
+    RET_STATE res = agizo_execute_string(r, s);
     free(s);
     return GOOD;
 }
 
 uint8_t agizo_execute_string(Agizo_Runtime* runtime, char* content)
 {
-    printf("???");
     agizo_lexer_preprocess(content, runtime->file_c);
 
     return GOOD;

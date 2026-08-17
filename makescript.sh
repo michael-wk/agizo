@@ -35,6 +35,7 @@ declare -a sources=(
     "lexer"
     "parser"
     "agizo"
+    "strlib"
 )
 
 

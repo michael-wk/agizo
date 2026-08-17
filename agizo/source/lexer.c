@@ -5,10 +5,11 @@
 void agizo_lexer_preprocess(char* str, uint32_t size)
 {
     // will iterate over the string like this
-    uint32_t c = 0;
+    uint16_t c = 0;
+    printf("______________\r\nlexer:\r\n");
     while (c < size)
     {
-        printf("lexer : %c\r\n",str[c++]);
+        printf("%c",str[c++]);
     }
 }
 
